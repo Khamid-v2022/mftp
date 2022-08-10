@@ -1,0 +1,84 @@
+:host {
+  height: 100%;
+}
+.editor {
+  height: calc(100% - 109px);
+}
+::ng-deep ngx-monaco-editor {
+  height: 100% !important;
+}
+.breadcrum {
+  position: relative;
+  height: 35px;
+  .btn-open {
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    margin-right: 10px;
+    fa-icon {
+      height: 20px;
+    }
+  }
+
+  .breadcrum-current {
+    background-color: #fffff3;
+    border-top: 1px solid #353535;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    .breadcrum-history {
+      position: absolute;
+      bottom: 36px;
+      width: 100%;
+      padding: 5px 10px;
+      border: 1px solid #353535;
+      background: #ffffff;
+      height: auto;
+      left: 0;
+      .breadcrum-item {
+        cursor: pointer;
+        display: flex;
+        margin: 5px 0;
+        align-items: center;
+        &:hover {
+          background: #3535351f;
+        }
+      }
+    }
+  }
+}
+.modal-footer {
+  background-color: #353535;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .logo {
+    height: 23px;
+    width: 100px;
+    img {
+      width: 100%;
+    }
+  }
+  .group-button {
+    display: flex;
+    align-items: center;
+    width: 20%;
+    justify-content: space-between;
+    .btn-cancel {
+      background-color: #ffffff;
+      margin-right: 20px;
+    }
+    .input-type {
+      .text-term {
+        color: #ffffff;
+      }
+      .checkmark {
+        background: #ffffff;
+        border: 2px solid #ffffff;
+      }
+    }
+  }
+}

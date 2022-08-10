@@ -1,0 +1,28 @@
+<div class="breadcrumb" *ngIf="breadcrumb">
+  <div class="breadcrumb-wrapper">
+    <button class="btn btn-transparent btn-history">
+      <fa-icon
+        class="history"
+        cardicon
+        [icon]="['fas', 'clock-rotate-left']"
+      ></fa-icon>
+      <fa-icon
+        class="dropdown"
+        cardicon
+        [icon]="['fas', 'sort-down']"
+      ></fa-icon>
+    </button>
+    <div class="breadcrumb-link">
+      <ol class="breadcrumb-link-wrapper">
+        <li class="breadcrumb-item" *ngFor="let link of breadcrumb.links">
+          <span *ngIf="link.icon != ''">
+            <fa-icon cardicon [icon]="[link.typeIcon, link.icon]"></fa-icon>
+          </span>
+          <span *ngIf="link.icon == ''">
+            {{ link.name }}
+          </span>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>

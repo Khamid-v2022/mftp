@@ -1,0 +1,289 @@
+<div class="modal-header label-warning">
+  <h2 class="modal-title" id="invitite">Login</h2>
+</div>
+<div class="tab-group">
+  <div class="tab-button">
+    <div class="tab-button-wrapper">
+      <button
+        class="btn btn-transparent btn-tab"
+        [class.active]="tab == 1"
+        (click)="chooseTab(1)"
+      >
+        FTP
+      </button>
+      <button
+        [class.active]="tab == 2"
+        class="btn btn-transparent btn-tab"
+        (click)="chooseTab(2)"
+      >
+        SFTP/SCP
+      </button>
+    </div>
+  </div>
+
+  <div class="tab-login" *ngIf="tab == 1">
+    <form [formGroup]="loginFormFTP" (ngSubmit)="tryLoginFTP(loginFormFTP)">
+      <div class="modal-body pr-2 pl-2" formGroupName="configuration">
+        <ngb-alert [dismissible]="false" type="danger" *ngIf="error != ''">
+          <strong>Error!</strong> {{ error }}
+        </ngb-alert>
+        <div class="form-group">
+          <div class="col-md-10 mt-1">
+            <label for="host"> Host: </label>
+            <input
+              input
+              type="text"
+              class="form-control"
+              id="host"
+              name="host"
+              formControlName="host"
+              required
+            />
+          </div>
+          <div class="col-md-2 col-md-2-right mt-1">
+            <label for="port"> Port: </label>
+            <input
+              input
+              type="text"
+              class="form-control"
+              id="port"
+              name="port"
+              formControlName="port"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12 mt-1">
+            <label for="username"> User Name: </label>
+            <input
+              input
+              type="text"
+              class="form-control"
+              id="username"
+              name="username"
+              formControlName="username"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12 mt-1">
+            <label for="username"> Password: </label>
+            <input
+              input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              formControlName="password"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12 mt-1">
+            <label for="username"> Initial Directory: </label>
+            <input
+              input
+              type="text"
+              class="form-control"
+              id="initialdirectory"
+              name="initialdirectory"
+              formControlName="initialDirectory"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-12 col-12 text-center text-sm-left">
+            <div class="input-type">
+              <label class="contain">
+                <input
+                  class="iptxt"
+                  type="checkbox"
+                  formControlName="passive"
+                />
+                <span class="checkmark checkmark-checkbox"></span>
+              </label>
+              <a class="text text-regular text-term"> Passive mode </a>
+            </div>
+            <div class="input-type">
+              <label class="contain">
+                <input class="iptxt" type="checkbox" formControlName="ssl" />
+                <span class="checkmark checkmark-checkbox"></span>
+              </label>
+              <a class="text text-regular text-term">
+                Use SSL (if supported)
+              </a>
+            </div>
+            <div class="input-type">
+              <label class="contain">
+                <input
+                  class="iptxt"
+                  type="checkbox"
+                  [(ngModel)]="remember"
+                  [ngModelOptions]="{ standalone: true }"
+                />
+                <span class="checkmark checkmark-checkbox"></span>
+              </label>
+              <a class="text text-regular text-term"> Keep me logged in </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer login-footer">
+        <div class="link" (click)="goTo()">Powered by Monsta FTP</div>
+        <button type="submit" class="btn btn-success">
+          <ng-container *ngIf="!loading"> Connect </ng-container>
+          <ng-container *ngIf="loading">
+            <div class="spinner">
+              <img src="./assets/images/loading.gif" alt="" />
+            </div>
+          </ng-container>
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="tab-login" *ngIf="tab == 2">
+    <!--  [formGroup]="loginFormSFTP" (ngSubmit)="tryLoginSFTP(loginFormSFTP)" -->
+    <!-- <form> -->
+    <div class="modal-body pr-2 pl-2">
+      <div class="form-group">
+        <div class="col-md-10 mt-1">
+          <label for="host"> Host: </label>
+          <input
+            input
+            type="text"
+            class="form-control"
+            id="host"
+            name="host"
+            required
+          />
+        </div>
+        <div class="col-md-2 col-md-2-right mt-1">
+          <label for="port"> Port: </label>
+          <input
+            input
+            type="text"
+            class="form-control"
+            id="port"
+            name="port"
+            required
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12 mt-1">
+          <label for="username"> User Name: </label>
+          <input
+            input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            required
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12 mt-1">
+          <label for="username"> Initial Directory: </label>
+          <input
+            input
+            type="text"
+            class="form-control"
+            id="initialdirectory"
+            name="initialdirectory"
+            required
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12 mt-1">
+          <label for="username"> Authentication Type: </label>
+          <select
+            class="form-control"
+            id="authenticationtype"
+            name="authenticationtype"
+            required
+            [(ngModel)]="Atype"
+            (change)="changeAuthenticationType($event)"
+          >
+            <option value=""></option>
+            <ng-container *ngFor="let item of authenticationTypeArr">
+              <option [value]="item.value">{{ item.name }}</option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="authType == 'password'">
+        <div class="col-md-12 mt-1">
+          <label for="username"> Password: </label>
+          <input
+            input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            required
+          />
+        </div>
+      </div>
+      <div class="form-group" *ngIf="authType == 'keyfile'">
+        <div class="col-md-12 mt-1">
+          <label for="username"> Private Key Password (Optional): </label>
+          <input
+            input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            required
+          />
+        </div>
+      </div>
+      <div class="form-group" *ngIf="authType == 'keyfile'">
+        <div class="col-md-12 mt-1">
+          <label for="username"> Private Key: </label>
+          <input
+            input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            required
+          />
+        </div>
+      </div>
+      <div class="form-group" *ngIf="authType == 'keyfile'">
+        <div class="col-md-12 mt-1">
+          <label for="username"> Public Key: </label>
+          <input
+            input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            required
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12 col-12 text-center text-sm-left">
+          <div class="input-type">
+            <label class="contain">
+              <input class="iptxt" type="checkbox" />
+              <span class="checkmark checkmark-checkbox"></span>
+            </label>
+            <a class="text text-regular text-term"> Keep me logged in </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer login-footer">
+      <div class="link" (click)="goTo()">Powered by Monsta FTP</div>
+      <button class="btn btn-success">Connect</button>
+    </div>
+    <!-- </form> -->
+  </div>
+</div>

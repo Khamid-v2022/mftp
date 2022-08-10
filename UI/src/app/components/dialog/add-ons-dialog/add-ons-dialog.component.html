@@ -1,0 +1,40 @@
+<div class="modal-header label-warning">
+  <h2 class="modal-title" id="invitite">Add-ons</h2>
+  <button
+    type="button"
+    class="btn btn-transparent close"
+    aria-label="Close"
+    (click)="close()"
+  >
+    <fa-icon cardicon [icon]="['fas', 'xmark']"></fa-icon>
+  </button>
+</div>
+<form>
+  <div class="modal-body pr-2 pl-2">
+    <div class="form-group">Your current license is the Starter Edition</div>
+    <div class="form-group">
+      <a href="https://www.monstaftp.com/upgrade" target="_blank">
+        Unlock more features with our FREE upgrade trial!
+      </a>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12 mt-1">
+        <textarea
+          input
+          type="text"
+          class="form-control"
+          placeholder="Paste your new license key here..."
+          id="licensekey"
+          name="licensekey"
+          required
+        ></textarea>
+      </div>
+    </div>
+    <div class="form-group"></div>
+    <button type="submit" class="btn btn-success">Complete Upgrade</button>
+  </div>
+
+  <div class="modal-footer login-footer">
+    <button class="btn btn-cancel">OK</button>
+  </div>
+</form>

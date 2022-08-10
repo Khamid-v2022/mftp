@@ -1,0 +1,28 @@
+<div class="footer-main">
+  <div class="group-button">
+    <ng-container *ngFor="let item of mainMenuItems">
+      <button
+        class="btn btn-monsta"
+        [ngbTooltip]="item.tooltips"
+        [openDelay]="300"
+        [closeDelay]="500"
+        placement="top"
+        (click)="onClickMenuItem(item)"
+        [class.inactive]="item.isActive"
+        [class.disabled-link]="item.isDisabled"
+      >
+        <fa-icon cardicon [icon]="[item.type, item.icon]"></fa-icon>
+      </button>
+    </ng-container>
+  </div>
+  <button
+    class="btn btn-monsta"
+    ngbTooltip="Session Information"
+    [openDelay]="300"
+    [closeDelay]="500"
+    placement="top"
+  >
+    <fa-icon cardicon [icon]="['fas', 'circle-info']"></fa-icon>
+  </button>
+</div>
+<iframe id="download-iframe" *ngIf="downloadLink" [src]="downloadLink"></iframe>

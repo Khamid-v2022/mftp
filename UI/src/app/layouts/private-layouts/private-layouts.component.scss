@@ -1,0 +1,69 @@
+.layout-content-main {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: calc(100vh - 75px);
+  overflow: hidden;
+  .drawer {
+    width: 75px;
+    background: #353535;
+    border: none;
+    transition: width 0.3s;
+    overflow: hidden;
+    position: fixed;
+    height: calc(100vh - 75px);
+    right: 0;
+    z-index: 2;
+    &.collapse-nav {
+      width: 55px;
+    }
+    &.hidden-mobile {
+      width: 0;
+      position: absolute;
+      z-index: 10000;
+      height: 100%;
+    }
+    &.show-mobile {
+      width: 260px;
+      position: absolute;
+      z-index: 10000;
+      height: 100%;
+    }
+    ::ng-deep {
+      .mat-drawer-inner-container {
+        overflow: hidden;
+      }
+    }
+  }
+  .mat-drawer-inner-container {
+    overflow-x: hidden;
+  }
+
+  .mat-drawer-container {
+    height: 100%;
+  }
+  .drawer-content {
+    width: 100%;
+    transition: width 0.3s;
+    &.content-mobile {
+      width: 100%;
+    }
+    &.collapse-content {
+      width: calc(100% - 55px);
+    }
+  }
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+}
+
+@media (max-width: 960px) {
+  mat-drawer {
+    width: 100%;
+  }
+}

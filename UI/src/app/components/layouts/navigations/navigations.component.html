@@ -1,0 +1,17 @@
+<div class="menu">
+  <div class="group-button">
+    <ng-container *ngFor="let item of mainMenuItems">
+      <button
+        class="btn btn-monsta"
+        [ngbTooltip]="item.tooltips"
+        [openDelay]="300"
+        [closeDelay]="500"
+        placement="bottom"
+        (click)="onClickMenuItem(item.action)"
+        *ngIf="item.isActive"
+      >
+        <fa-icon cardicon [icon]="[item.type, item.icon]"></fa-icon>
+      </button>
+    </ng-container>
+  </div>
+</div>

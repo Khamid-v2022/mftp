@@ -1,0 +1,53 @@
+<div class="toolbar-main">
+  <div class="group-button">
+    <button
+      [class.inactive]="indexBF == 0 || arrBackForward.length == 1"
+      class="btn btn-monsta"
+      ngbTooltip="Back"
+      [openDelay]="300"
+      [closeDelay]="500"
+      placement="bottom"
+      (click)="clickBackForward('back')"
+    >
+      <fa-icon cardicon [icon]="['fas', 'angle-left']"></fa-icon>
+    </button>
+    <button
+      [class.inactive]="
+        indexBF == arrBackForward.length - 1 || arrBackForward.length == 1
+      "
+      class="btn btn-monsta"
+      ngbTooltip="Forward"
+      [openDelay]="300"
+      [closeDelay]="500"
+      placement="bottom"
+      (click)="clickBackForward('forward')"
+    >
+      <fa-icon cardicon [icon]="['fas', 'angle-right']"></fa-icon>
+    </button>
+    <button
+      class="btn btn-monsta"
+      ngbTooltip="Refresh"
+      [openDelay]="300"
+      [closeDelay]="500"
+      placement="bottom"
+      (click)="clickRefresh()"
+    >
+      <fa-icon cardicon [icon]="['fas', 'rotate']"></fa-icon>
+    </button>
+  </div>
+  <div class="logo-wrapper">
+    <div class="logo">
+      <img src="./assets/images/logo/monsta-logo-400w.png" alt="" />
+    </div>
+    <button
+      class="btn btn-monsta"
+      ngbTooltip="Menu"
+      [openDelay]="300"
+      [closeDelay]="500"
+      placement="bottom"
+      (click)="toggleSideBar()"
+    >
+      <fa-icon cardicon [icon]="['fas', 'bars']"></fa-icon>
+    </button>
+  </div>
+</div>

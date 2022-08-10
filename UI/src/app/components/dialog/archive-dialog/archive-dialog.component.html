@@ -1,0 +1,30 @@
+<div class="modal-header label-warning">
+  <h2 class="modal-title" id="invitite">Warning!</h2>
+  <button
+    type="button"
+    class="btn btn-transparent close"
+    aria-label="Close"
+    (click)="close()"
+  >
+    <fa-icon cardicon [icon]="['fas', 'xmark']"></fa-icon>
+  </button>
+</div>
+<div class="modal-body pr-2 pl-2">
+  <div class="row">
+    <div class="col-md-12">
+      The file <strong>{{ name }}</strong> is a zip archive. Do you want to
+      unzip the files to the current folder after uploading?
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-cancel" (click)="close()">Cancel</button>
+  <div class="group-button">
+    <button type="button" class="btn btn-cancel" (click)="upload()">
+      Just Upload
+    </button>
+    <button type="button" class="btn btn-cancel" (click)="uploadZip()">
+      Upload and Unzip
+    </button>
+  </div>
+</div>

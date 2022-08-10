@@ -1,0 +1,21 @@
+<div class="modal-header label-danger">
+  <h2 class="modal-title" id="invitite">Error!</h2>
+  <button
+    type="button"
+    class="btn btn-transparent close"
+    aria-label="Close"
+    (click)="close()"
+  >
+    <fa-icon cardicon [icon]="['fas', 'xmark']"></fa-icon>
+  </button>
+</div>
+<div class="modal-body pr-2 pl-2">
+  <div class="row">
+    <div class="col-md-12">
+      {{ error }}
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-cancel" (click)="close()">OK</button>
+</div>

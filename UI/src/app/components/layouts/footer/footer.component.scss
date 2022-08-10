@@ -1,0 +1,18 @@
+.footer-main {
+  background: #353535;
+  height: 75px;
+  display: flex;
+  justify-content: space-between;
+  .group-button {
+    align-items: center;
+    display: flex;
+    .btn-monsta {
+      fa-icon {
+        font-size: 125%;
+      }
+    }
+  }
+}
+#download-iframe {
+  display: none;
+}

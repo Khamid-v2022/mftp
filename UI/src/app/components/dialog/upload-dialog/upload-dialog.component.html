@@ -1,0 +1,38 @@
+<div class="modal-header label-warning">
+  <h2 class="modal-title" id="invitite">File Transfer</h2>
+  <div class="count">{{ fileCount }} of {{ countAll }}</div>
+</div>
+<div>
+  <div class="modal-body pr-2 pl-2">
+    <div class="file-name">
+      <div class="name">
+        <div class="icon">
+          <fa-icon cardicon [icon]="['fas', typeFile]"></fa-icon>
+        </div>
+        <div class="name">{{ namefile }}</div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-transparent close"
+        aria-label="Close"
+        (click)="close()"
+      >
+        <fa-icon cardicon [icon]="['fas', 'xmark']"></fa-icon>
+      </button>
+    </div>
+    <div class="meter animate">
+      <span [ngStyle]="{ width: width }"><span></span></span>
+    </div>
+    <div class="count-extract">
+      <div class>{{ sizeStr }} of {{ totalFileSizeStr }}</div>
+      <div class="text">
+        <span *ngIf="isUploading">Uploading...</span>
+        <span *ngIf="isProgress">Progressing...</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer login-footer">
+    <button class="btn btn-danger" (click)="close()">Cancel All</button>
+  </div>
+</div>

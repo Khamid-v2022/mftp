@@ -1,0 +1,335 @@
+<app-loading *ngIf="loading"></app-loading>
+<div class="breadcrumb" *ngIf="breadcrumb">
+  <div class="breadcrumb-wrapper">
+    <button
+      class="btn btn-transparent btn-history"
+      #toggleButton
+      (click)="openHistory()"
+    >
+      <fa-icon
+        class="history"
+        cardicon
+        [icon]="['fas', 'clock-rotate-left']"
+      ></fa-icon>
+      <fa-icon
+        class="dropdown"
+        cardicon
+        [icon]="['fas', 'sort-down']"
+      ></fa-icon>
+    </button>
+    <div class="breadcrumb-link">
+      <ol class="breadcrumb-link-wrapper">
+        <li
+          class="breadcrumb-item"
+          (click)="clickGoToRoute(link)"
+          *ngFor="let link of breadcrumb.links"
+        >
+          <span *ngIf="link.icon != ''">
+            <fa-icon cardicon [icon]="[link.typeIcon, link.icon]"></fa-icon>
+          </span>
+          <span *ngIf="link.icon == ''">
+            {{ link.name }}
+          </span>
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="history-breadcrumb" *ngIf="isOpenHis" id="his">
+    <ng-container *ngFor="let his of arrHistoryBreadcrumb">
+      <div class="history-item">
+        <div class="history-left"></div>
+        <div class="history-content" (click)="goToHis(his)">
+          <div class="history-text">
+            {{ his.name }}
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<div class="home-contain">
+  <div class="table">
+    <div class="thead">
+      <div class="tr">
+        <div class="th" (click)="sort('name', arrFolderFile)">
+          <div class="title">
+            Name
+            <fa-icon
+              *ngIf="sortType && sortTypeStr == 'name'"
+              class="up"
+              cardicon
+              [icon]="['fas', 'sort-up']"
+            ></fa-icon>
+            <fa-icon
+              *ngIf="!sortType && sortTypeStr == 'name'"
+              class="down"
+              cardicon
+              [icon]="['fas', 'sort-down']"
+            ></fa-icon>
+          </div>
+        </div>
+        <div class="th" (click)="sort('size', arrFolderFile)">
+          <div class="title">
+            Size
+            <fa-icon
+              *ngIf="sortType && sortTypeStr == 'size'"
+              class="up"
+              cardicon
+              [icon]="['fas', 'sort-up']"
+            ></fa-icon>
+            <fa-icon
+              *ngIf="!sortType && sortTypeStr == 'size'"
+              class="down"
+              cardicon
+              [icon]="['fas', 'sort-down']"
+            ></fa-icon>
+          </div>
+        </div>
+        <div class="th" (click)="sort('date', arrFolderFile)">
+          <div class="title">
+            Changed
+            <fa-icon
+              *ngIf="sortType && sortTypeStr == 'date'"
+              class="up"
+              cardicon
+              [icon]="['fas', 'sort-up']"
+            ></fa-icon>
+            <fa-icon
+              *ngIf="!sortType && sortTypeStr == 'date'"
+              class="down"
+              cardicon
+              [icon]="['fas', 'sort-down']"
+            ></fa-icon>
+          </div>
+        </div>
+        <div class="th">Permission</div>
+        <div class="th"></div>
+      </div>
+    </div>
+    <div class="tbody" (contextmenu)="openMenuItem($event, null, -1)">
+      <div
+        class="tr"
+        (click)="clickBack()"
+        [class.back]="childFolder"
+        *ngIf="childFolder"
+      >
+        <div class="td">
+          <div class="name-ff">
+            <div class="type">
+              <fa-icon cardicon [icon]="['fas', 'arrow-turn-up']"></fa-icon>
+            </div>
+            <div class="name">..</div>
+          </div>
+        </div>
+        <div class="td"></div>
+        <div class="td"></div>
+        <div class="td"></div>
+        <div class="td"></div>
+      </div>
+      <ng-container *ngFor="let ff of arrFolderFile; let i = index">
+        <div
+          class="tr"
+          [class.active]="ff.isActive"
+          (mousedown)="mousedown($event, ff, i)"
+          (mouseover)="mouseover(ff)"
+          (window:mouseup)="mouseup()"
+          (contextmenu)="openMenuItem($event, ff, i)"
+        >
+          <div class="td">
+            <div class="name-ff">
+              <div class="type">
+                <fa-icon
+                  [class.folder-icon]="ff.isDirectory"
+                  [class.file-icon]="!ff.isDirectory"
+                  cardicon
+                  [icon]="[ff.type, ff.icon]"
+                ></fa-icon>
+              </div>
+              <button
+                class="btn btn-transparent btn-down"
+                (click)="openMenuItem($event, ff, i)"
+              >
+                <fa-icon cardicon [icon]="['fas', 'sort-down']"></fa-icon>
+              </button>
+              <div class="name" (click)="goTo(ff, breadcrumb.links)">
+                {{ ff.name }}
+              </div>
+            </div>
+          </div>
+          <div class="td">{{ ff.isDirectory ? "" : ff.prefix }}</div>
+          <div class="td">
+            {{
+              ff.checkDate
+                ? (ff.dayStr | date: "h:mm a")
+                : (ff.dayStr | date: "MMM dd, yyyy")
+            }}
+          </div>
+          <div class="td" (click)="openPermission(ff, itemTargetMultiCHMOD)">
+            {{ ff.permissions }}
+          </div>
+          <div class="td">
+            <button class="btn btn-transparent" (click)="openProperties(ff)">
+              <fa-icon cardicon [icon]="['fas', 'ellipsis-vertical']"></fa-icon>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+<div #contextMenu></div>
+
+<div
+  class="contextMenu"
+  *ngIf="footerItem.isOpen"
+  [class.upload]="footerItem.action == 'upload'"
+  [class.new]="footerItem.action == 'newfilefolder'"
+  [class.info]="footerItem.action == 'info'"
+>
+  <ul *ngIf="footerItem.action == 'upload'">
+    <!-- <ng-container *ngFor="let item of arrUpload">
+      <li (click)="openDialogFooterItem(item)">
+        <div class="icon">
+          <fa-icon cardicon [icon]="[item.type, item.icon]"></fa-icon>
+        </div>
+        <div class="name">{{ item.menuText }}</div>
+      </li>
+    </ng-container> -->
+    <li (click)="openUpload(); files.click()">
+      <div class="icon">
+        <fa-icon cardicon [icon]="['far', 'file']"></fa-icon>
+      </div>
+      <div class="name">Upload file...</div>
+      <input
+        #files
+        data-parsley-type="digits"
+        type="file"
+        class="input-file"
+        required
+        id="file"
+        name="file"
+        [(ngModel)]="file"
+        (change)="previewFile($event)"
+        multiple
+      />
+    </li>
+    <li (click)="openUpload(); folders.click()">
+      <div class="icon">
+        <fa-icon cardicon [icon]="['far', 'folder']"></fa-icon>
+      </div>
+      <div class="name">Upload Folder...</div>
+      <input
+        #folders
+        data-parsley-type="digits"
+        type="file"
+        class="input-file"
+        required
+        id="folder"
+        name="folder"
+        [(ngModel)]="folder"
+        directory
+        mozdirectory
+        webkitdirectory
+        odirectory
+        msdirectory
+        (change)="previewFolder($event)"
+      />
+    </li>
+    <li (click)="openUpload(); zips.click()">
+      <div class="icon">
+        <fa-icon cardicon [icon]="['far', 'file-zipper']"></fa-icon>
+      </div>
+      <div class="name">Upload Zip...</div>
+      <input
+        #zips
+        data-parsley-type="digits"
+        type="file"
+        class="input-file"
+        required
+        id="zip"
+        name="zip"
+        [(ngModel)]="zip"
+        accept="zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"
+        (change)="previewZip($event)"
+      />
+    </li>
+  </ul>
+
+  <ul *ngIf="footerItem.action == 'newfilefolder'">
+    <ng-container *ngFor="let item of arrNewFileFolder">
+      <li (click)="openDialogFooterItem(item)">
+        <div class="icon">
+          <fa-icon cardicon [icon]="[item.type, item.icon]"></fa-icon>
+        </div>
+        <div class="name">{{ item.menuText }}</div>
+      </li>
+    </ng-container>
+  </ul>
+  <ul class="info-wrapper" *ngIf="footerItem.action == 'info'">
+    <li>
+      <div class="icon">
+        <fa-icon cardicon [icon]="['fas', 'server']"></fa-icon>
+      </div>
+      <div class="name">{{ host }}</div>
+    </li>
+    <li>
+      <div class="icon">
+        <fa-icon cardicon [icon]="['far', 'user']"></fa-icon>
+      </div>
+      <div class="name">{{ username }}</div>
+    </li>
+    <li>
+      <div class="icon">
+        <fa-icon cardicon [icon]="['fas', 'upload']"></fa-icon>
+      </div>
+      <div class="name">
+        {{
+          systemVars.maxFileUpload <= 0
+            ? 1024 * 1024 * 1024
+            : normalizeFileSize(systemVars.maxFileUpload)
+        }}
+      </div>
+    </li>
+    <li>
+      <div class="icon">
+        <fa-icon cardicon [icon]="['fas', 'circle-info']"></fa-icon>
+      </div>
+      <div class="name">{{ systemVars.version }}</div>
+    </li>
+  </ul>
+</div>
+<div class="footer" (click)="onClickedOutsideBreadCrumb()">
+  <div class="footer-main">
+    <div class="group-button">
+      <ng-container *ngFor="let item of footerMenuItems">
+        <button
+          class="btn btn-monsta"
+          [ngbTooltip]="item.tooltips"
+          [openDelay]="300"
+          [closeDelay]="500"
+          placement="top"
+          (click)="onClickMenuItem(item)"
+          [class.inactive]="item.isActive"
+          [class.disabled-link]="item.isDisabled"
+        >
+          <fa-icon cardicon [icon]="[item.type, item.icon]"></fa-icon>
+        </button>
+      </ng-container>
+    </div>
+    <button
+      class="btn btn-monsta"
+      ngbTooltip="Session Information"
+      [openDelay]="300"
+      [closeDelay]="500"
+      placement="top"
+      (click)="openInfo()"
+    >
+      <fa-icon cardicon [icon]="['fas', 'circle-info']"></fa-icon>
+    </button>
+  </div>
+  <iframe
+    id="download-iframe"
+    *ngIf="downloadLink"
+    [src]="downloadLink"
+  ></iframe>
+</div>

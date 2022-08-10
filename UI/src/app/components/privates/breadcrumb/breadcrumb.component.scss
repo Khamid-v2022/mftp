@@ -1,0 +1,46 @@
+.breadcrumb {
+  margin: 0;
+  height: 47px;
+  background: #fffff3;
+  border-bottom: 1px solid #dee0e3;
+  .breadcrumb-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .btn-history {
+      background: #c3c645;
+      color: #ffffff;
+      height: 100%;
+      width: 75px;
+      position: relative;
+      fa-icon {
+        &.history {
+          font-size: 146%;
+        }
+        &.dropdown {
+          position: absolute;
+          font-size: 80%;
+          bottom: 15px;
+          right: 15px;
+        }
+      }
+    }
+    .breadcrumb-link-wrapper {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      .breadcrumb-item {
+        padding: 0 10px 0 0;
+        cursor: pointer;
+        &::before {
+          padding-right: 10px;
+        }
+        &:first-child {
+          padding: 0 20px;
+        }
+      }
+    }
+  }
+}

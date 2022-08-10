@@ -1,0 +1,17 @@
+.modal-body {
+  padding: 25px 20px 10px;
+  .form-group {
+    margin-bottom: 13px;
+    justify-content: flex-start;
+    color: #343434;
+    fa-icon {
+      color: #808080;
+      font-size: 20px;
+      width: 25px;
+      text-align: center;
+    }
+    .text {
+      margin-left: 15px;
+    }
+  }
+}

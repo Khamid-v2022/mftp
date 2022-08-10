@@ -1,0 +1,32 @@
+<div class="toolbar">
+  <app-toolbar
+    [(toggle)]="isToggle"
+    [(refresh)]="isRefresh"
+    (backForwardActionChange)="clickBackForwardAction($event)"
+    [backForward]="backForwardArr"
+  ></app-toolbar>
+</div>
+<div class="layout-content-main">
+  <div
+    class="drawer-content scroll-bar-style"
+    [class.content-mobile]="isMobile"
+  >
+    <div class="main-content">
+      <app-home
+        [refresh]="isRefresh"
+        (arrBackForwardChange)="clickArr($event)"
+        [actionBF]="backForwardAc"
+      ></app-home>
+    </div>
+  </div>
+  <div class="drawer scroll-bar-style" [class.hidden-mobile]="isToggle">
+    <app-navigations [(toggle)]="isToggle"></app-navigations>
+  </div>
+</div>
+<!-- <div class="footer">
+  <app-footer
+    [footerItem]="footerMenu"
+    [choosenFF]="choosenFileFolder"
+    (clickItemFooter)="onClickFooterItem($event)"
+  ></app-footer>
+</div> -->

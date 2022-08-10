@@ -1,0 +1,156 @@
+:host {
+  .mat-icon {
+    vertical-align: middle;
+    // margin-right: 20px;
+    color: #ffffff;
+  }
+}
+.profile-card {
+  margin-top: 10px;
+  text-align: center;
+  padding: 0 20px 20px 20px;
+  img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  .header {
+    margin-top: 20px;
+  }
+}
+.mat-expansion-panel-body {
+  padding: 0;
+}
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: none;
+}
+.expansion-pn {
+  background-color: #fdfdfd;
+  h2 {
+    color: #4caf50;
+  }
+  h2 {
+    font-weight: bold !important;
+  }
+  a {
+    font-weight: 300;
+  }
+}
+.mat-list-base {
+  padding: 0;
+}
+.top-nav {
+  height: 64px;
+  box-shadow: 0 2px 5px 1px rgba(64, 60, 67, 0.16);
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  .logo {
+    margin-left: 0.5em;
+    width: 44px;
+    img {
+      width: 100%;
+    }
+  }
+  .brand-name {
+    margin-left: 0.5em;
+    font-size: 24px;
+    color: #ffffff;
+    font-weight: 700;
+  }
+  // &.logo-collapse {
+  //   width: 100%;
+  //   .logo {
+  //     width: 44px;
+  //     margin: auto;
+  //     img {
+  //       width: 100%;
+  //     }
+  //   }
+  //   .brand-name {
+  //     display: none;
+  //   }
+  // }
+}
+.mat-list-base {
+  .navigation-wrapper {
+    height: calc(100vh - 108px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    .menu-navigation {
+      .mat-list-item {
+        margin: 20px 0;
+        fa-icon {
+          color: #ffffff;
+          font-size: 20px;
+          margin-right: 20px;
+        }
+        .menu-name {
+          color: #ffffff;
+          // font-weight: bold;
+        }
+        transition: opacity 0.3s;
+        .menu-collapse {
+          opacity: 0;
+        }
+        &.active {
+          background: #ffffff;
+          fa-icon,
+          .menu-name {
+            color: #4caf50;
+          }
+        }
+      }
+    }
+    .upgrade-account {
+      text-align: center;
+      margin: 20px 0;
+      width: 260px;
+      img {
+        width: 30%;
+      }
+      .upgrade-des {
+        width: 55%;
+        margin: 20px auto;
+        line-height: 2;
+        font-weight: normal;
+        color: #ffffff;
+      }
+      .btn-upgrade {
+        font-weight: normal;
+        &:hover {
+          border: 1px solid #ffffff;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  .collapse-side {
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    border-top: 1px solid #ffffff;
+    align-items: center;
+    background: #229a3d;
+    .btn-collapse {
+      border-radius: 0;
+      width: 55px;
+      fa-icon {
+        color: #ffffff;
+      }
+    }
+    .collapse-text {
+      width: calc(100% - 55px);
+      color: #ffffff;
+    }
+  }
+}
+@media only screen and (max-width: 600px) {
+  .top-nav {
+    height: 56px;
+  }
+}

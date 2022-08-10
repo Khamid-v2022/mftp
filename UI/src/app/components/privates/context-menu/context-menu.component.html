@@ -1,0 +1,17 @@
+<div class="contextMenu" tabindex="-1" aria-hidden="true">
+  <ul *ngIf="isDisplayContextMenu" [class.multi]="contextMenuItems.length == 6">
+    <ng-container *ngFor="let menuItem of contextMenuItems; index as i">
+      <li
+        (click)="onContextMenuClick($event, menuItem)"
+        [class.inactive]="!menuItem.isActive"
+      >
+        <div class="icon">
+          <fa-icon cardicon [icon]="[menuItem.type, menuItem.icon]"></fa-icon>
+        </div>
+        <div class="name">
+          {{ menuItem.menuText }}
+        </div>
+      </li>
+    </ng-container>
+  </ul>
+</div>

@@ -1,0 +1,54 @@
+<div class="modal-header label-warning">
+  <h2 class="modal-title" id="invitite">
+    {{
+      action == "newfile"
+        ? "New File"
+        : action == "newfolder"
+        ? "New Folder"
+        : action == "fetchfile"
+        ? "Fecth File"
+        : action == "rename"
+        ? "Rename File"
+        : "Create Zip Archive"
+    }}
+  </h2>
+  <button
+    type="button"
+    class="btn btn-transparent close"
+    aria-label="Close"
+    (click)="close()"
+  >
+    <fa-icon cardicon [icon]="['fas', 'xmark']"></fa-icon>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <div class="col-md-12 mt-1">
+      <input
+        input
+        type="text"
+        (keypress)="enter($event)"
+        placeholder="{{
+          action == 'newfile'
+            ? 'New File Name'
+            : action == 'newfolder'
+            ? 'New Folder Name'
+            : action == 'fetchfile'
+            ? 'Enter URL of file'
+            : action == 'fetchfile'
+            ? 'Enter new file name'
+            : 'Enter archive name'
+        }}"
+        class="form-control"
+        id="name"
+        name="name"
+        [(ngModel)]="name"
+        required
+      />
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-cancel" (click)="close()">Cancel</button>
+  <button type="button" class="btn btn-cancel" (click)="save()">OK</button>
+</div>

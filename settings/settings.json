@@ -1,0 +1,8 @@
+{
+  "language": "en_us",
+  "hideProUpgradeMessages": false,
+  "connectionRestrictions": {
+    "types": ["ftp", "sftp"]
+  },
+  "disableCreateZipArchive": false
+}

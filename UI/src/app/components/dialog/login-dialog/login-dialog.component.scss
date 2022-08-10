@@ -1,0 +1,42 @@
+.login-footer {
+  justify-content: space-between;
+  .link {
+    color: #337ab7;
+    cursor: pointer;
+  }
+}
+.tab-group {
+  .tab-button {
+    padding: 15px 15px 0;
+    .tab-button-wrapper {
+      border-bottom: 1px solid #c1c1c1;
+      .btn-tab {
+        margin-right: 3px;
+        border: 1px solid #c1c1c1;
+        border-bottom: 0;
+        border-radius: 5px 5px 0 0 !important;
+        &.active {
+          background: #337ab7;
+          color: #ffffff;
+          border: 1px solid #337ab7;
+        }
+      }
+    }
+  }
+  .tab-login {
+    .form-group {
+      .col-md-2-right {
+        margin-left: 5px;
+        flex: 0 0 auto;
+        width: 15.666667%;
+      }
+    }
+  }
+}
+.btn-success {
+  .spinner {
+    img {
+      width: 25px;
+    }
+  }
+}

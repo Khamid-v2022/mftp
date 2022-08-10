@@ -1,0 +1,29 @@
+<div class="modal-header label-warning">
+  <h2 class="modal-title" id="invitite">Warning!</h2>
+  <button
+    type="button"
+    class="btn btn-transparent close"
+    aria-label="Close"
+    (click)="close()"
+  >
+    <fa-icon cardicon [icon]="['fas', 'xmark']"></fa-icon>
+  </button>
+</div>
+<div class="modal-body pr-2 pl-2">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- <form [formGroup]="newDepartment" (ngSubmit)="tryEdit()">
+        <div class="mt-1 text-center">
+          <button type="submit" class="btn btn-invoice">Edit</button>
+        </div>
+      </form> -->
+      Are you sure you want to log out?
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-cancel" (click)="close()">Cancel</button>
+  <button type="button" class="btn btn-danger" (click)="confirm()">
+    Confirm
+  </button>
+</div>
